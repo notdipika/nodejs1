@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #blog-creator {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #blog-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #blog-form input[type="text"],
+        #blog-form input[type="url"],
+        #blog-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #blog-form button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #blog-form button:hover {
+            background-color: #555;
+        }
+
+        .blog-post {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .blog-post h2 {
+            margin-bottom: 5px;
+        }
+
+        .blog-post img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .blog-post p {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="blog-creator">
+        <h1>Create Your Blog</h1>
+        <form id="blog-form" action="/createblog" method="post">
+            <label for="blog-title">Title:</label>
+            <input type="text" id="blog-title" name="title" required>
+
+            <label for="blog-subtitle">Subtitle:</label>
+            <input type="text" id="blog-subtitle" name="subtitle">
+
+            <label for="blog-image">Image URL:</label>
+            <input type="url" id="blog-image" name="image">
+
+            <label for="blog-description">Description:</label>
+            <textarea id="blog-description" name="description" rows="4" required></textarea>
+
+            <button type="submit" onclick="return createBlogPost()">Create Blog</button>
+        </form>
+    </section>
+
+</body>
+</html>
