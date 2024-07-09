@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* Basic reset */
+  
         * {
             margin: 0;
             padding: 0;
@@ -114,16 +114,16 @@
 
     <section id="blog-creator">
         <h1>Create Your Blog</h1>
-        <form id="blog-form" action="/createblog" method="post">
+        <form id="blog-form" action="/createblog" method="post" enctype="multipart/form-data">
             <label for="blog-title">Title:</label>
             <input type="text" id="blog-title" name="title" required>
 
             <label for="blog-subtitle">Subtitle:</label>
             <input type="text" id="blog-subtitle" name="subtitle">
 
-            <label for="blog-image">Image URL:</label>
-            <input type="url" id="blog-image" name="image">
-
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            
             <label for="blog-description">Description:</label>
             <textarea id="blog-description" name="description" rows="4" required></textarea>
 
