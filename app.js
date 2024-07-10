@@ -35,6 +35,13 @@ app.get("/contact",(req,res)=>{
     res.render("contact.ejs", {contact})
 })
 
+app.get("/blog/:id", async (req,res)=>{
+    // console.log(req.params.id)
+    const id = req.params.id
+    const blog = await Blog.findById(id)
+    res.render("blog.ejs", {blog})
+})
+
 app.get("/createblog",(req,res)=>{
     const create = "createblog"
     res.render("createblog.ejs", {create})
@@ -45,11 +52,10 @@ app.post("/createblog", upload.single('image'), async (req,res)=>{
     // const title = req.body.blog-title
     // const content = req.body.blog-description
     // const subtitle =req.body.blog-subtitle
-    const fileName = req.file?.filename
+    const fileName = req.file.filename
     // console.log("fileName", req.file)
-    const {title, subtitle, description,image} = req.body
-    console.log(title, subtitle, description, image)
-    console.log(req.body)
+    const {title, subtitle, description} = req.body
+    console.log(title, subtitle, description)
 
     await Blog.create({
         title, // title : title,
@@ -58,12 +64,27 @@ app.post("/createblog", upload.single('image'), async (req,res)=>{
         image : fileName
     })
 
-    res.send("Post hitted.")
+    res.send("Blog created successfully.")
 
+})
+
+
+app.get("/editblog/:id", async (req,res)=>{
+    // console.log(req.params.id)
+    const id = req.params.id
+    const blog = await Blog.findByIdAndUpdate(id)
+    res.render("edit.ejs", {blog})
+})
+
+
+app.get("/deleteblog/:id", async (req,res)=>{
+    const id = req.params.id
+    const blog = await Blog.findByIdAndDelete(id) 
+    res.redirect("/")
 })
 
 app.use(express.static("./storage"))
 
 app.listen(3000, ()=>{
-    console.log("Nodejs project has started at port" + 3000)
+    console.log("Nodejs project has started at port " + 3000)
 })
