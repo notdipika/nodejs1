@@ -1,11 +1,16 @@
-const express = require("express")
+require("dotenv").config()
+ const express = require("express")
 const connectToDb = require("./database/databaseConnection")
 const Blog = require("./model/blogmodel")
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 const app = express()
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
+
 const {multer,storage}= require('./middleware/multerConfig')
-const Register = require("./model/userModel")
-const User = require("./model/userModel")
+const isAuthenticated = require('./middleware/isAuthenticated')
+const User = require('./model/userModel')
 const upload = multer({storage : storage})
 
 connectToDb()
@@ -71,14 +76,13 @@ app.post("/login", async (req,res)=>{
                 res.send("Invalid password")
             }
             else{
+                const token = jwt.sign({userId : user[0]._id}, process.env.secret,{
+                    expiresIn : "20d"
+                })
+                res.cookie("token",token)
                 res.send("Logged in succesfully")
            }
         }
-})
-
-app.get("/about",(req,res)=>{ 
-    const name= "Dipika"
-    res.render("about.ejs", {name})  //{name : name}
 })
 
 app.get("/contact",(req,res)=>{
@@ -93,7 +97,7 @@ app.get("/blog/:id", async (req,res)=>{
     res.render("blog.ejs", {blog})
 })
 
-app.get("/createblog",(req,res)=>{
+app.get("/createblog", isAuthenticated, (req,res)=>{
     const create = "createblog"
     res.render("createblog.ejs", {create})
 })
