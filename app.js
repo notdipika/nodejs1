@@ -1,7 +1,7 @@
 require("dotenv").config()
  const express = require("express")
 const connectToDb = require("./database/databaseConnection")
-const Blog = require("./model/blogmodel")
+const Blog = require("./model/blogModel")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const app = express()
