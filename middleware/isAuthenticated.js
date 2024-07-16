@@ -1,13 +1,12 @@
-const jst = require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
 const User = require("../model/userModel")
-
+const { findById } = require("../model/blogModel");
 const promisify = require("util").promisify
 
 const isAuthenticated = (req,res,next)=>{
     const token =req.cookies.token
-    console.log("token")
     if(!token|| token === null){
-        return res.send("Please login")
+        return res.redirect("/login")
     }
     //else block
     jwt.verify(token, process.env.secret, async (err,result)=>{

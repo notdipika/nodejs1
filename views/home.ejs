@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar and Cards Example</title>
+    <title>Home</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,6 +31,38 @@
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
+        }
+        .search-bar-container {
+            display: flex;
+            justify-content: end;
+            margin: 0 auto;
+            flex: 2;
+        }
+        .search-bar {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 450px;
+            font-size: 16px;
+            padding-left: 10px;
+        }
+        .search-btn {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: -4px;
+        }
+        .btn{
+            background-color: #141414;
+            color: #fff;
+            border: none;
+            padding: 3px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
         }
         .container {
             padding: 20px;
@@ -61,15 +93,19 @@
 </head>
 <body>
     <%- include("navbar.ejs") %>
+
     <div class="container">
-   <% Blogs.forEach((blog)=>{   %>
-    
-        <div class="card">
-            <img src=<%- blog.image %> alt="Image 1">
-            <h2> <%- blog.title %> </h2>
-            <a href="/blog/<%-blog._id %>">See More</a>
-        </div>  
-        <%  })  %>
+        <% if (Blogs.length === 0) { %>
+            <p>No blogs found.</p>
+        <% } else { %>
+            <% Blogs.forEach((blog)=>{   %>
+                <div class="card">
+                    <img src=<%- blog.image %> alt="Image 1">
+                    <h2> <%- blog.title %> </h2>
+                    <a href="/blog/<%-blog._id %>">See More</a>
+                </div>  
+            <%  })  %>
+        <% } %>
     </div>
 </body>
 </html>
